@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Python | Learn Python & Coding</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00a8cc;
+            --secondary: #ff6b9d;
+            --dark-bg: #0a192f;
+            --card-bg: #112240;
+            --card-border: #1d3a5c;
+            --text: #e6f1ff;
+            --text-light: #8892b0;
+            --correct: #4ade80;
+            --incorrect: #f87171;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 2rem 0 1.5rem;
+            text-align: center;
+            background: linear-gradient(to right, rgba(0, 217, 255, 0.1), rgba(255, 107, 157, 0.1));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Practice Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--card-border);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.2s; }
+        .category-card:nth-child(3) { animation-delay: 0.3s; }
+        .category-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .category-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-count {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Practice Area */
+        .practice-container {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .practice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-button {
+            background-color: var(--card-bg);
+            color: var(--primary);
+            border: 1px solid var(--card-border);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            background-color: rgba(0, 217, 255, 0.1);
+        }
+
+        .practice-title {
+            font-size: 1.8rem;
+            color: var(--text);
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Question Card */
+        .question-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--card-border);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: rgba(255, 107, 157, 0.1);
+            color: var(--secondary);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .code-snippet {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .option-btn {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1.05rem;
+            transition: var(--transition);
+        }
+
+        .option-btn:hover {
+            background-color: rgba(0, 217, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .option-btn.selected {
+            background-color: rgba(0, 217, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .option-btn.correct {
+            background-color: rgba(74, 222, 128, 0.2);
+            border-color: var(--correct);
+        }
+
+        .option-btn.incorrect {
+            background-color: rgba(248, 113, 113, 0.2);
+            border-color: var(--incorrect);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .show-answer-btn {
+            background-color: var(--card-bg);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .show-answer-btn:hover {
+            background-color: rgba(0, 217, 255, 0.1);
+        }
+
+        .next-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.2);
+        }
+
+        .next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Answer Explanation */
+        .explanation-box {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--secondary);
+            display: none;
+        }
+
+        .explanation-title {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Results Screen */
+        .results-container {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .results-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .results-score {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .results-message {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .restart-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-card {
+                padding: 1.5rem;
+            }
+            
+            .question-card {
+                padding: 1.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .practice-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .code-snippet {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="header-content">
+                <h1>Practice Python</h1>
+                <p class="subtitle">Test your knowledge and improve your skills with interactive exercises</p>
+            </div>
+        </header>
+
+        <!-- Categories Section -->
+        <section id="categories-section">
+            <div class="categories">
+                <div class="category-card" data-category="mcq">
+                    <div class="category-icon">
+                        <i class="fas fa-list-ul"></i>
+                    </div>
+                    <h3 class="category-title">Python MCQs</h3>
+                    <p class="category-desc">Multiple choice questions to test your understanding of Python fundamentals.</p>
+                    <span class="question-count">10 Questions</span>
+                </div>
+
+                <div class="category-card" data-category="output">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="category-title">Guess the Output</h3>
+                    <p class="category-desc">Predict the output of Python code snippets to master your debugging skills.</p>
+                    <span class="question-count">8 Questions</span>
+                </div>
+
+                <div class="category-card" data-category="fill">
+                    <div class="category-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3 class="category-title">Fill in the Blank</h3>
+                    <p class="category-desc">Complete the missing parts of Python code to reinforce syntax learning.</p>
+                    <span class="question-count">12 Questions</span>
+                </div>
+
+                <div class="category-card" data-category="truefalse">
+                    <div class="category-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="category-title">True / False</h3>
+                    <p class="category-desc">Determine if statements about Python are true or false to test your knowledge.</p>
+                    <span class="question-count">15 Questions</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Container (Hidden by default) -->
+        <section id="practice-container" class="practice-container">
+            <div class="practice-header">
+                <button id="back-button" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Categories
+                </button>
+                <h2 id="practice-title" class="practice-title"></h2>
+            </div>
+
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <!-- Question Card -->
+            <div id="question-card" class="question-card">
+                <div id="question-number" class="question-number">Question 1 of 10</div>
+                <div id="question-text" class="question-text"></div>
+                <div id="code-snippet" class="code-snippet" style="display: none;"></div>
+                
+                <div id="options-container" class="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+
+                <div class="action-buttons">
+                    <button id="show-answer-btn" class="btn show-answer-btn">
+                        <i class="fas fa-lightbulb"></i> Show Answer
+                    </button>
+                    <button id="next-btn" class="btn next-btn" disabled>
+                        Next Question <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div id="explanation-box" class="explanation-box">
+                    <div class="explanation-title">Explanation</div>
+                    <div id="explanation-text"></div>
+                </div>
+            </div>
+
+            <!-- Results Container -->
+            <div id="results-container" class="results-container">
+                <div class="results-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 class="results-title">Practice Complete!</h2>
+                <div id="results-score" class="results-score">8/10</div>
+                <p id="results-message" class="results-message">Great job! You've shown a solid understanding of Python concepts. Keep practicing to improve further.</p>
+                <button id="restart-btn" class="restart-btn">
+                    <i class="fas fa-redo"></i> Try Another Category
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container">
+        <p>Learn Python & Coding • Educational App • Designed for Beginners</p>
+        <p style="margin-top: 0.5rem;">No ads, no login required, 100% educational content</p>
+    </footer>
+
+    <script>
+        // Question data for each category
+        const questionData = {
+            mcq: {
+                title: "Python MCQs",
+                questions: [
+                    {
+                        question: "Which of the following is the correct way to declare a variable in Python?",
+                        options: [
+                            "variable x = 5;",
+                            "x = 5",
+                            "int x = 5",
+                            "x := 5"
+                        ],
+                        correct: 1,
+                        explanation: "In Python, you declare a variable by simply assigning a value to it using the equals sign. No explicit type declaration or semicolon is needed."
+                    },
+                    {
+                        question: "What is the output of the following code?<br><code>print(2 ** 3)</code>",
+                        code: "print(2 ** 3)",
+                        options: [
+                            "6",
+                            "8",
+                            "9",
+                            "23"
+                        ],
+                        correct: 1,
+                        explanation: "The ** operator is used for exponentiation in Python. 2 ** 3 means 2 raised to the power of 3, which equals 8."
+                    },
+                    {
+                        question: "Which data type is mutable in Python?",
+                        options: [
+                            "int",
+                            "str",
+                            "tuple",
+                            "list"
+                        ],
+                        correct: 3,
+                        explanation: "Lists are mutable in Python, meaning their elements can be changed after creation. Integers, strings, and tuples are immutable."
+                    }
+                ]
+            },
+            output: {
+                title: "Guess the Output",
+                questions: [
+                    {
+                        question: "What will be printed to the console?",
+                        code: "x = 10\ny = 3\nprint(x // y)",
+                        options: [
+                            "3.33",
+                            "3",
+                            "3.0",
+                            "1"
+                        ],
+                        correct: 1,
+                        explanation: "The // operator performs floor division, returning the largest integer less than or equal to the result. 10 // 3 equals 3."
+                    },
+                    {
+                        question: "What is the output of this code snippet?",
+                        code: "my_list = [1, 2, 3, 4, 5]\nprint(my_list[1:4])",
+                        options: [
+                            "[1, 2, 3]",
+                            "[2, 3, 4]",
+                            "[1, 2, 3, 4]",
+                            "[2, 3, 4, 5]"
+                        ],
+                        correct: 1,
+                        explanation: "Python list slicing uses zero-based indexing and is exclusive of the end index. my_list[1:4] returns elements at indices 1, 2, and 3, which are [2, 3, 4]."
+                    }
+                ]
+            },
+            fill: {
+                title: "Fill in the Blank",
+                questions: [
+                    {
+                        question: "Complete the code to create a function that returns the square of a number.",
+                        code: "def square(num):\n    ______ num ** 2",
+                        options: [
+                            "print",
+                            "return",
+                            "output",
+                            "give"
+                        ],
+                        correct: 1,
+                        explanation: "The 'return' statement is used to send a result back from a function. In this case, we want to return the square of the number."
+                    },
+                    {
+                        question: "Fill in the blank to iterate over a list and print each item.",
+                        code: "fruits = ['apple', 'banana', 'cherry']\nfor fruit in ______:\n    print(fruit)",
+                        options: [
+                            "fruits",
+                            "fruit",
+                            "range(fruits)",
+                            "len(fruits)"
+                        ],
+                        correct: 0,
+                        explanation: "To iterate over a list in Python, you use the 'for item in list_name' syntax. So we need to reference the list name 'fruits' in the loop."
+                    }
+                ]
+            },
+            truefalse: {
+                title: "True / False",
+                questions: [
+                    {
+                        question: "Python uses indentation to define code blocks, unlike other languages that use braces.",
+                        options: [
+                            "True",
+                            "False"
+                        ],
+                        correct: 0,
+                        explanation: "True. Python uses indentation (whitespace) to define blocks of code. This is a fundamental characteristic of Python syntax."
+                    },
+                    {
+                        question: "In Python, a string is mutable, meaning you can change individual characters after creation.",
+                        options: [
+                            "True",
+                            "False"
+                        ],
+                        correct: 1,
+                        explanation: "False. Strings in Python are immutable. Once a string is created, its contents cannot be changed. You can create new strings based on existing ones."
+                    }
+                ]
+            }
+        };
+
+        // DOM Elements
+        const categoriesSection = document.getElementById('categories-section');
+        const practiceContainer = document.getElementById('practice-container');
+        const practiceTitle = document.getElementById('practice-title');
+        const backButton = document.getElementById('back-button');
+        const questionCard = document.getElementById('question-card');
+        const resultsContainer = document.getElementById('results-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const codeSnippet = document.getElementById('code-snippet');
+        const optionsContainer = document.getElementById('options-container');
+        const showAnswerBtn = document.getElementById('show-answer-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const explanationBox = document.getElementById('explanation-box');
+        const explanationText = document.getElementById('explanation-text');
+        const progressBar = document.getElementById('progress-bar');
+        const resultsScore = document.getElementById('results-score');
+        const resultsMessage = document.getElementById('results-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const categoryCards = document.querySelectorAll('.category-card');
+
+        // State variables
+        let currentCategory = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        let answerShown = false;
+
+        // Initialize event listeners
+        function init() {
+            // Category card click events
+            categoryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const category = card.getAttribute('data-category');
+                    startPractice(category);
+                });
+            });
+
+            // Back button
+            backButton.addEventListener('click', goBackToCategories);
+
+            // Show answer button
+            showAnswerBtn.addEventListener('click', showAnswer);
+
+            // Next button
+            nextBtn.addEventListener('click', nextQuestion);
+
+            // Restart button
+            restartBtn.addEventListener('click', goBackToCategories);
+        }
+
+        // Start practice for a specific category
+        function startPractice(category) {
+            currentCategory = category;
+            currentQuestions = questionData[category].questions;
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            // Update UI
+            practiceTitle.textContent = questionData[category].title;
+            categoriesSection.style.display = 'none';
+            practiceContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            questionCard.style.display = 'block';
+            
+            // Load first question
+            loadQuestion();
+        }
+
+        // Load the current question
+        function loadQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+            answerShown = false;
+            selectedOption = null;
+            
+            // Update question number and progress
+            questionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            const progressPercent = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            // Update question text
+            questionText.innerHTML = question.question;
+            
+            // Update code snippet if exists
+            if (question.code) {
+                codeSnippet.textContent = question.code;
+                codeSnippet.style.display = 'block';
+            } else {
+                codeSnippet.style.display = 'none';
+            }
+            
+            // Clear and update options
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'option-btn';
+                optionBtn.textContent = option;
+                optionBtn.setAttribute('data-index', index);
+                optionBtn.addEventListener('click', () => selectOption(optionBtn, index));
+                optionsContainer.appendChild(optionBtn);
+            });
+            
+            // Reset buttons and explanation
+            nextBtn.disabled = true;
+            showAnswerBtn.disabled = false;
+            explanationBox.style.display = 'none';
+            
+            // Animate question card
+            questionCard.style.opacity = '0';
+            questionCard.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                questionCard.style.animation = 'fadeInUp 0.6s forwards';
+            }, 10);
+        }
+
+        // Select an option
+        function selectOption(optionBtn, index) {
+            if (answerShown) return;
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            optionBtn.classList.add('selected');
+            selectedOption = index;
+            
+            // Enable next button
+            nextBtn.disabled = false;
+        }
+
+        // Show answer explanation
+        function showAnswer() {
+            if (selectedOption === null) {
+                alert('Please select an answer first!');
+                return;
+            }
+            
+            answerShown = true;
+            const question = currentQuestions[currentQuestionIndex];
+            const correctIndex = question.correct;
+            
+            // Highlight correct and incorrect options
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+                if (index === correctIndex) {
+                    btn.classList.add('correct');
+                } else if (index === selectedOption && index !== correctIndex) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            // Show explanation
+            explanationText.textContent = question.explanation;
+            explanationBox.style.display = 'block';
+            
+            // Update score if correct
+            if (selectedOption === correctIndex) {
+                score++;
+            }
+            
+            // Disable option buttons
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.style.pointerEvents = 'none';
+            });
+            
+            // Disable show answer button
+            showAnswerBtn.disabled = true;
+        }
+
+        // Move to next question or show results
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show results screen
+        function showResults() {
+            questionCard.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            // Update results
+            resultsScore.textContent = `${score}/${currentQuestions.length}`;
+            
+            // Set message based on score
+            let message = '';
+            const percentage = (score / currentQuestions.length) * 100;
+            
+            if (percentage >= 90) {
+                message = "Excellent! You've mastered this topic. Consider moving to more advanced concepts.";
+            } else if (percentage >= 70) {
+                message = "Great job! You have a good understanding of this topic. Review the explanations to improve further.";
+            } else if (percentage >= 50) {
+                message = "Good effort! You understand the basics. Review the questions you missed and try again.";
+            } else {
+                message = "Keep practicing! Review the explanations and try this category again to improve your score.";
+            }
+            
+            resultsMessage.textContent = message;
+            
+            // Animate results container
+            resultsContainer.style.opacity = '0';
+            resultsContainer.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                resultsContainer.style.animation = 'fadeInUp 0.6s forwards';
+            }, 10);
+            
+            // Update progress bar to 100%
+            progressBar.style.width = '100%';
+        }
+
+        // Go back to categories
+        function goBackToCategories() {
+            categoriesSection.style.display = 'block';
+            practiceContainer.style.display = 'none';
+            
+            // Reset category cards animation
+            categoryCards.forEach(card => {
+                card.style.animation = 'fadeInUp 0.6s forwards';
+            });
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

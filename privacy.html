@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Privacy Policy | Learn Python & Coding</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #306998;
+            --secondary-color: #FFD43B;
+            --text-color: #333333;
+            --text-light: #666666;
+            --background-color: #ffffff;
+            --card-color: #f8f9fa;
+            --border-color: #eaeaea;
+            --accent-color: #4B8BBE;
+        }
+        
+        body.dark-mode {
+            --primary-color: #4B8BBE;
+            --secondary-color: #FFE873;
+            --text-color: #f0f0f0;
+            --text-light: #b0b0b0;
+            --background-color: #121212;
+            --card-color: #1e1e1e;
+            --border-color: #333333;
+            --accent-color: #5a9fd4;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            padding-bottom: 40px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        
+        .app-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .app-subtitle {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        .header-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        .last-updated {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 100;
+        }
+        
+        .policy-section {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .section-icon {
+            font-size: 1.3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 1.4rem;
+        }
+        
+        .policy-section p {
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .highlight {
+            background-color: rgba(48, 105, 152, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight p {
+            margin-bottom: 0;
+        }
+        
+        .contact-email {
+            color: var(--accent-color);
+            font-weight: 600;
+            word-break: break-all;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile-specific optimizations */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            .policy-section {
+                padding: 20px;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .app-name {
+                font-size: 1.5rem;
+            }
+            
+            .mode-toggle {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* WebView specific adjustments */
+        @media (max-width: 400px) {
+            .policy-section {
+                padding: 18px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="logo-icon fas fa-code"></i>
+                <div>
+                    <div class="app-name">Learn Python & Coding</div>
+                    <div class="app-subtitle">Educational Programming App</div>
+                </div>
+            </div>
+            <h1 class="header-title">Privacy Policy</h1>
+            <div class="last-updated">Last updated: June 15, 2023</div>
+        </header>
+        
+        <main>
+            <section class="policy-section">
+                <div class="section-title">
+                    <i class="section-icon fas fa-info-circle"></i>
+                    <h2>Introduction</h2>
+                </div>
+                <p>Welcome to <strong>Learn Python & Coding</strong>, an educational app designed to help beginners learn programming concepts and Python development. Your privacy is important to us, and this policy explains how we handle information in our app.</p>
+                <p>This app is built for educational purposes and focuses solely on providing programming tutorials, exercises, and learning materials. We believe in transparency and want you to understand our practices.</p>
+            </section>
+            
+            <section class="policy-section">
+                <div class="section-title">
+                    <i class="section-icon fas fa-database"></i>
+                    <h2>Information Collection</h2>
+                </div>
+                <p><strong>Learn Python & Coding does NOT directly collect personal information</strong> such as your name, email address, or contact details. The app is designed to function without requiring any personal data from you.</p>
+                <div class="highlight">
+                    <p>We may collect basic, non-personal information automatically, such as:</p>
+                    <p>• Device type and operating system version</p>
+                    <p>• App usage statistics (which lessons are accessed, time spent)</p>
+                    <p>• Anonymous performance data to improve the app experience</p>
+                </div>
+                <p>This information helps us understand how the app is being used and allows us to make improvements to better serve our learning community.</p>
+            </section>
+            
+            <section class="policy-section">
+                <div class="section-title">
+                    <i class="section-icon fas fa-external-link-alt"></i>
+                    <h2>Third-Party Services</h2>
+                </div>
+                <p>The app may use third-party services that have their own privacy policies. These services may include:</p>
+                <p>• Analytics services to understand app usage patterns</p>
+                <p>• Advertising services (if ads are enabled in the app)</p>
+                <p>• Cloud services for syncing learning progress (optional)</p>
+                <p>We encourage you to review the privacy policies of these third-party providers. These services may collect information as described in their own privacy policies.</p>
+            </section>
+            
+            <section class="policy-section">
+                <div class="section-title">
+                    <i class="section-icon fas fa-child"></i>
+                    <h2>Children's Privacy</h2>
+                </div>
+                <p><strong>Learn Python & Coding is safe for students and learners of all ages.</strong> The app is designed with education in mind and is appropriate for beginners, including children under 13.</p>
+                <p>We do not intentionally collect personal information from children. If we discover that we have inadvertently collected personal data from a child, we will take steps to delete that information promptly.</p>
+                <p>Parents and guardians can feel confident that our app provides a safe learning environment focused exclusively on programming education.</p>
+            </section>
+            
+            <section class="policy-section">
+                <div class="section-title">
+                    <i class="section-icon fas fa-shield-alt"></i>
+                    <h2>Data Security</h2>
+                </div>
+                <p>We take the security of any information seriously. While we don't collect sensitive personal data, we implement appropriate measures to protect the basic information we do handle.</p>
+                <p>Important points about our security approach:</p>
+                <p>• We don't store sensitive personal information on our servers</p>
+                <p>• Any data collected is anonymized where possible</p>
+                <p>• We follow generally accepted industry standards for data protection</p>
+                <p>• Learning progress data stored locally on your device is kept private</p>
+            </section>
+            
+            <section class="policy-section">
+                <div class="section-title">
+                    <i class="section-icon fas fa-sync-alt"></i>
+                    <h2>Changes to Privacy Policy</h2>
+                </div>
+                <p>We may update this Privacy Policy occasionally to reflect changes in our practices or for other operational, legal, or regulatory reasons.</p>
+                <p>When we make changes, we'll update the "Last updated" date at the top of this policy. We encourage you to review this privacy policy periodically to stay informed about how we're protecting your information.</p>
+                <p>Continued use of the app after any changes signifies your acceptance of the updated policy.</p>
+            </section>
+            
+            <section class="policy-section">
+                <div class="section-title">
+                    <i class="section-icon fas fa-envelope"></i>
+                    <h2>Contact Information</h2>
+                </div>
+                <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
+                <p class="contact-email">privacy@learnpythoncoding.example.com</p>
+                <p>We aim to respond to all privacy-related inquiries within a reasonable timeframe. Please note that this is a placeholder email address for demonstration purposes.</p>
+            </section>
+        </main>
+        
+        <footer>
+            <p>© 2023 Learn Python & Coding. All rights reserved.</p>
+            <p>This privacy policy is designed to be clear and transparent about our data practices.</p>
+        </footer>
+        
+        <button class="mode-toggle" id="modeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <script>
+        // Dark/Light mode toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        // Check for saved theme or prefer-color-scheme
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Smooth scroll for better mobile experience
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
