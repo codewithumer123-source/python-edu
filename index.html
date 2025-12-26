@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="google-site-verification" content="a0u8pAqx5-u-t9jqKQVpYkdW2qXjBrXgWZpFPLnPFq8" />
     <title>Learn Python & Coding</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -272,61 +271,80 @@
         .card:active {
             transform: scale(0.98);
         }
+        .card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Animated Logo -->
-        <div class="logo-container">
-            <div class="logo">
-                <i class="fab fa-python"></i>
-            </div>
+   <div class="container">
+    <!-- Animated Logo -->
+    <div class="logo-container">
+        <div class="logo">
+            <i class="fab fa-python"></i>
         </div>
-        
-        <!-- Main Content -->
-        <div class="content">
-            <h1>Learn Python & Coding</h1>
-            <p class="tagline">Master programming step by step with interactive lessons, examples, and quizzes designed for beginners.</p>
-            
-            <!-- Action Cards -->
-            <div class="card-container">
-                <div class="card" id="startLearning">
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Learn Python & Coding</h1>
+        <p class="tagline">
+            Master programming step by step with interactive lessons, examples, and quizzes designed for beginners.
+        </p>
+
+        <!-- Action Cards -->
+        <div class="card-container">
+
+            <!-- Start Learning -->
+            <a href="lesson.html" class="card-link">
+                <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-play-circle"></i>
                     </div>
                     <div class="card-content">
                         <h3>Start Learning Python</h3>
-                        <p>Begin with fundamentals: variables, loops, functions. Interactive lessons with examples.</p>
+                        <p>Begin with fundamentals: variables, loops, functions.</p>
                     </div>
                 </div>
-                
-                <div class="card" id="languages">
+            </a>
+
+            <!-- Languages -->
+            <a href="quiz.html" class="card-link">
+                <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-code"></i>
                     </div>
                     <div class="card-content">
                         <h3>Programming Languages</h3>
-                        <p>Explore Python, JavaScript, Java, C++ and compare their features, uses, and syntax.</p>
+                        <p>Explore Python, JavaScript, Java, C++ and more.</p>
                     </div>
                 </div>
-                
-                <div class="card" id="practice">
+            </a>
+
+            <!-- Practice -->
+            <a href="practice.html" class="card-link">
+                <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-brain"></i>
                     </div>
                     <div class="card-content">
                         <h3>Practice & Quizzes</h3>
-                        <p>Test your knowledge with interactive coding exercises and quizzes. Track your progress.</p>
+                        <p>Test your knowledge with exercises and quizzes.</p>
                     </div>
                 </div>
-            </div>
+            </a>
+
         </div>
-        
-        <!-- Footer -->
-        <footer>
-            <p>Made for beginners – Educational App</p>
-        </footer>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made for beginners – Educational App</p>
+    </footer>
+</div>
+
 
     <script>
         // Add animation to logo on load
@@ -375,5 +393,4 @@
         });
     </script>
 </body>
-
 </html>
